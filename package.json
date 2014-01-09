@@ -1,8 +1,8 @@
 {
   "name": "bitfinex-api",
   "version": "0.0.0",
-  "description": "A node.js wrapper for the Bitfinex API",
-  "main": "index.js",
+  "description": "A node.js wrapper for the Bitfinex API.",
+  "main": "bitfinex.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/npp1993/bitfinex-api.git"
