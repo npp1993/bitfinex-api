@@ -1,0 +1,26 @@
+{
+  "name": "bitfinex-api",
+  "version": "0.0.0",
+  "description": "A node.js wrapper for the Bitfinex API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npp1993/bitfinex-api.git"
+  },
+  "keywords": [
+    "api",
+    "bitfinex",
+    "Nathaniel",
+    "Pawelczyk",
+    "node",
+    "js"
+  ],
+  "author": "Nathaniel Pawelczyk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/npp1993/bitfinex-api/issues"
+  }
+}
