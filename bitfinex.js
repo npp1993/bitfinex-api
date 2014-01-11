@@ -4,29 +4,41 @@ A node.js wrapper for the Bitfinex API
 */
 
 var request = require("request");
-var microtime = require("microtime");
-var querystring = require("querystring");
 var crypto = require("crypto");
 
 function Bitfinex(key, secret) {
 
 	var settings = {
-		url: "https://api.bitfinex.com/",
-		version: "v1",
+		base: "https://api.bitfinex.com",
+		version: "/v1",
 		key: key,
 		secret: secret
+		nonce: Date.now();
 	};
+	
+	var _nonce;
+	
+	function nonce() {
+		return _nonce++;
+	}
 	
 	function unauthenticated_call(path, callback) {
 	
-		var url = "/" + settings.version + path;
+		var url = settings.base + settings.version + path;
 		
 		request({url: url, method: "GET"}, callback);
 	}
 	
 	function authenticated_call(path, parameters, callback) {
 	
-		var options = {};
+		var options = {
+			request: settings.version + path,
+			nonce: JSON.stringify(nonce()),
+		};
+		
+		for(key in parameters) {
+			options[key] = parameters[key];
+		}
 		
 		var payload = new Buffer(JSON.stringify(options)).toString("base64");
 		var signature = crypto.createHmac("sha384", options).update(payload).digest("hex");

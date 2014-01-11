@@ -26,8 +26,6 @@
   },
   "dependencies": {
     "request": "~2.31.0",
-    "microtime": "~0.5.1",
-    "querystring": "~0.2.0",
     "crypto": "0.0.3"
   }
 }
