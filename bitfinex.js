@@ -59,6 +59,8 @@ function Bitfinex(key, secret) {
 		unauthenticated_call(path, callback);
 	}
 	
+	this.ticker = ticker;
+	
 }
 
 module.exports = Bitfinex;
