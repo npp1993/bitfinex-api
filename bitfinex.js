@@ -12,8 +12,8 @@ function Bitfinex(key, secret) {
 		base: "https://api.bitfinex.com",
 		version: "/v1",
 		key: key,
-		secret: secret
-		nonce: Date.now();
+		secret: secret,
+		nonce: Date.now()
 	};
 	
 	var _nonce;
@@ -44,9 +44,9 @@ function Bitfinex(key, secret) {
 		var signature = crypto.createHmac("sha384", options).update(payload).digest("hex");
 		
 		var headers = {
-			X-BFX-APIKEY: key;
-			X-BFX-PAYLOAD: payload;
-			X-BFX-SIGNATURE: signature;
+			"X-BFX-APIKEY": key,
+			"X-BFX-PAYLOAD": payload,
+			"X-BFX-SIGNATURE": signature
 		}
 		
 		request({url: url, method: "POST", headers: headers}, callback);
