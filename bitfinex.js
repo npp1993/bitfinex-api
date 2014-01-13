@@ -13,13 +13,11 @@ function Bitfinex(key, secret) {
 		version: "/v1",
 		key: key,
 		secret: secret,
-		nonce: Date.now()
+		_nonce: Date.now()
 	};
 	
-	var _nonce;
-	
 	function nonce() {
-		return _nonce++;
+		return settings._nonce++;
 	}
 	
 	function unauthenticated_call(path, callback) {
@@ -52,15 +50,144 @@ function Bitfinex(key, secret) {
 		request({url: url, method: "POST", headers: headers}, callback);
 	}
 	
-	function ticker(symbol, callback) {
+	//unauthenticated methods
 	
+	function ticker(symbol, callback) {
 		var path = "/ticker/" + symbol;
-		
 		unauthenticated_call(path, callback);
 	}
 	
-	this.ticker = ticker;
+	function lendbook(currency, callback) {
+		var path = "/lendbook/" + currency;
+		unauthenticated_call(path, callback);
+	}
 	
+	function orderbook(symbol, callback) {
+		var path = "/orderbook/" + symbol;
+		unauthenticated_call(path, callback);
+	}
+	
+	function trades(symbol, callback) {
+		var path = "/trades/" + symbol;
+		unauthenticated_call(path, callback);
+	}
+	
+	function lends(currency, callback) {
+		var path = "/lends/" + currency;
+		unauthenticated_call(path, callback);
+	}
+	
+	function symbols(callback) {
+		var path = "/symbols";
+		unauthenticated_call(callback);
+	}
+	
+	//authenticated methods
+	
+	function new_order(options, callback) {
+		var path = "/order/new";
+		authenticated_call(path, options, callback);
+	}
+	
+	function multi_order(options, callback)
+	{
+		var path = "/order/new/multi";
+		authenticated_call(path, options, callback);
+	}
+	
+	function cancel_order(options, callback)
+	{
+		var path = "/order/cancel";
+		authenticated_call(path, options, callback);
+	}
+	
+	function cancel_multi(options, callback)
+	{
+		var path = "/order/cancel/multi";
+		authenticated_call(path, options, callback);
+	}
+	
+	function order_status(options, callback)
+	{
+		var path = "/order/status";
+		authenticated_call(path, options, callback);
+	}
+	
+	function active_orders(options, callback)
+	{
+		var path = "/orders";
+		authenticated_call(path, options, callback);
+	}
+	
+	function active_positions(options, callback)
+	{
+		var path = "/positions";
+		authenticated_call(path, options, callback);
+	}
+	
+	function past_trades(options, callback)
+	{
+		var path = "/mytrades";
+		authenticated_call(path, options, callback);
+	}
+	
+	function new_offer(options, callback)
+	{
+		var path = "/offer/new";
+		authenticated_call(path, options, callback);
+	}
+	
+	function cancel_offer(options, callback)
+	{
+		var path = "/offer/cancel";
+		authenticated_call(path, options, callback);
+	}
+	
+	function offer_status(options, callback)
+	{
+		var path = "/offer/status";
+		authenticated_call(path, options, callback);
+	}
+	
+	function active_offers(options, callback)
+	{
+		var path = "/offers";
+		authenticated_call(path, options, callback);
+	}
+	
+	function active_credits(options, callback)
+	{
+		var path = "/credits";
+		authenticated_call(path, options, callback);
+	}
+	
+	function balances(options, callback)
+	{
+		var path = "/balances";
+		authenticated_call(path, options, callback);
+	}
+	
+	this.ticker = ticker;
+	this.lendbook = lendbook;
+	this.orderbook = orderbook;
+	this.trades = trades;
+	this.lends = lends;
+	this.symbols = symbols;
+	
+	this.new_order = new_order;
+	this.multi_order = multi_order;
+	this.cancel_order = cancel_order;
+	this.cancel_multi = cancel_multi;
+	this.order_status = order_status;
+	this.active_orders = active_orders;
+	this.active_positions = active_positions;
+	this.past_trades = past_trades;
+	this.new_offer = new_offer;
+	this.cancel_offer = cancel_offer;
+	this.offer_status = offer_status;
+	this.active_offers = active_offers;
+	tihs.active_credits = active_credits;
+	this.balances = balances;
 }
 
 module.exports = Bitfinex;
